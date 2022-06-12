@@ -17,13 +17,16 @@ void revmotor() {
 }
 
 void setup() {
+  Serial.begin(9600);
   pinMode (driverPUL, OUTPUT);
-  pinMode (dirverDIR, OUTPUT);
+  pinMode (driverDIR, OUTPUT);
   attachInterrupt(digitalPinToInterrupt(reverseSwitch), revmotor, FALLING);
 }
 
 void loop() {
   pd = map((analogRead(spd)),0,1023,2000,50);
+  Serial.println(analogRead(spd));
+  Serial.println(pd);
   digitalWrite(driverDIR,setdir);
   digitalWrite(driverPUL,HIGH);
   delayMicroseconds(pd);
